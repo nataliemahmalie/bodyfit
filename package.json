@@ -1,0 +1,19 @@
+{
+  "name": "bodyfitproject",
+  "version": "1.0.0",
+  "description": "service of training suggestions for a trainee",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "natali&or",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.7",
+    "promise": "^8.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

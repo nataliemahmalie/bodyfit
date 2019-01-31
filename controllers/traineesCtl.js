@@ -10,7 +10,7 @@ module.exports={
       try {
          const docs = await newUser.find({})
          console.log(docs);
-         return res.json(docs);
+         return res.send(docs);
       } catch (err) { console.error(err) }
    },
    async createUser(req, res, next) {

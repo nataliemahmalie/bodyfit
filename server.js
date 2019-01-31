@@ -11,12 +11,12 @@ app.use(express.urlencoded({extended:true}));
 
 /*routes*/
 app.set('port',port);
-app.use('/', express.static('./public'));//for API
 app.use(
- (req,res,next) => {
- res.header("Access-Control-Allow-Origin", "*");
- res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,Accept");
- next();
+    (req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.set("Content-Type", "application/json");
+        next();
  });
 
 app.get('/getAllTrainees',traineesCtl.getAllTrainees)

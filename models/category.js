@@ -1,12 +1,12 @@
-const mongoose = require('mongoose')
+/*const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const newCategory = new Schema({
-male:Boolean,
-female:Boolean
-
+    upper_body: Boolean,
+    lower_body: Boolean,
+    middle_body: Boolean
 });
 
-module.exports=newCategory;
 
+module.exports =newCategory;*/
 

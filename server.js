@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const userCtl = require('./controllers/userCtl')
+const calcBmi = require('bmi-calc')
+const traineesCtl = require('./controllers/traineesCtl')
 const exeCtl = require('./controllers/exeCtl')
 const port = process.env.PORT || 3000;
 
@@ -18,24 +19,24 @@ app.use(
  next();
  });
 
- 
-app.get('/getAllexe',exeCtl.getAllexe);
-app.get('/getAllTrainees',userCtl.getAllTrainees);
-app.get('/getExeByName/:name',exeCtl.getExeByName)
-app.delete('/deleteExe',exeCtl.deleteExe)
+app.get('/getAllTrainees',traineesCtl.getAllTrainees)
+app.get('/getAllExe',exeCtl.getAllExe);
+app.get('/findExeByName/:name',exeCtl.findExeByName)
+app.delete('/deleteExe/:name',exeCtl.deleteExe)
+app.post('/createUser/:user&email&password',traineesCtl.createUser) //work when gmail API is connected. 
+app.put('/editExeByName',exeCtl.editExeByName)
+app.put('/setUserBlockList',traineesCtl.setUserBlockList)
 
-/*app.get('getUserByEmail',userCtl.getUserByEmail)
-app.get('/getExeByCategory',exeCtl.getExeByCategory)
-app.post('/createUser:full_name',userCtl.createUser)
-app.put('/setUserBlockList',userCtl.setUserBlockList)
-app.post('/addFavorites',userCtl.addFavorites)
+/*app.post('/addFavorites',userCtl.addFavorites)
 app.delete('/deleteFavorites',userCtl.deleteFavorites)
-app.get('/getFavorites',userCtl.getFavorites)*/
+app.get('/getFavorites',userCtl.getFavorites)
+app.get('/getExeByCategory',exeCtl.getExeByCategory)*/
 
 app.all('*', (req, res, next) => {
     res.send({
         'appName': "body-fit",
-        'by':"natali mahmmali & or hadad"})
+        'by':"natali mahmmali & or hadad",
+        'git repository':"https://github.com/nataliemahmalie/bodyfit"})
 })
 
 /*app.get('/css/style.css', (req, res) => {

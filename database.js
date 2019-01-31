@@ -10,11 +10,7 @@ const options = {
     pass: DB_PASS
 }
 
-const conn = mongoose.createConnection(url, options)
-
-conn.on('connected', () => console.log('mongoose connected'))
-conn.on('error', (err) => console.error(err))
-
-mongoose.connect(url, options)
-
-module.exports = conn
+mongoose
+ .connect(url, options)
+ .then(() => console.log('mongoose connected'))
+ .catch(err => console.log(`connection error: ${err}`));

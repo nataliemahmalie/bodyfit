@@ -10,8 +10,8 @@ module.exports={
     async addProfile(req, res, next) {
       try {
          const { email = null,  user = null } = req.body;
-         const docs = await Profile.find({ email: email });
-         const docs1 = await Profile.find({ user: user });
+         const docs = await newUser.find({ email: email });
+         const docs1 = await newUser.find({ user: user });
          if (docs.length) {
             console.log("A profile with that gmail account already exist");
             return res.json("A profile with that gmail account already exist");

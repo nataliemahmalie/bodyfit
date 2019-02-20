@@ -10,9 +10,6 @@ module.exports={
     async addProfile(req, res, next) {
       try {
          const { email = null,  user = null } = req.body;
-         if (!email || !user)
-            return res.json("userName and gmailAcount required");
-
          const docs = await Profile.find({ email: email });
          const docs1 = await Profile.find({ user: user });
          if (docs.length) {

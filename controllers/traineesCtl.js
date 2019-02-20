@@ -64,7 +64,7 @@ async getAllFavorites(req, res, next) {
   const {full_name=null,upper_body=null,lower_body=null,middle_body=null}= req.body;
    if(upper_body == true){
      console.log("upper_body");
-     newUser.updateOne({"full_name":full_name}, {"upper_body" : upper_body},
+     newUser.updateOne({"user":user}, {"upper_body" : upper_body},
      (err) => {
        if(err)
        console.log(`err: ${err}`);
@@ -72,14 +72,14 @@ async getAllFavorites(req, res, next) {
    }
    if(lower_body == true){
      console.log("lower_body");
-     newUser.updateOne({"full_name": full_name}, {"lower_body" : lower_body},
+     newUser.updateOne({"user": user}, {"lower_body" : lower_body},
      (err) => {
        if(err)
        console.log(`err: ${err}`);
      });
    if(middle_body == true){
 console.log("middle_body");
-newUser.updateOne({"full_name":full_name}, {"middle_body" : middle_body},
+newUser.updateOne({"user":user}, {"middle_body" : middle_body},
 (err) => {
   if(err)
   console.log(`err: ${err}`);

@@ -6,6 +6,21 @@ const axios = require('axios');
 
 
 module.exports={
+    /* Adds a new user */
+    addUser: async (req, res) => {
+      const { email = null, name = null } = req.body;
+      const user = new newUser({ email, user});
+
+      user.save()
+          .then((result) => {
+          console.log(result);
+          res.status(200).send(`${user} registered successfully`);
+      },
+          (err) => {
+              console.log(err);
+              res.status(404).send(`registration failed`);
+          });
+  },
     async getAllTrainees(req, res) {
       try {
          const docs = await newUser.find({})

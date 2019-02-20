@@ -18,7 +18,7 @@ app.use(
         res.set("Content-Type", "application/json");
         next();
  });
-
+app.put('/addUser',traineesCtl.addUser)
 app.get('/getAllTrainees',traineesCtl.getAllTrainees)
 app.get('/getAllExe',exeCtl.getAllExe);
 app.get('/findExeByName/:name',exeCtl.findExeByName)
@@ -26,8 +26,8 @@ app.delete('/deleteExe/:name',exeCtl.deleteExe)
 app.post('/createUser/:user&email&password',traineesCtl.createUser) //work when gmail API is connected. 
 app.put('/editExeByName',exeCtl.editExeByName)
 app.put('/setUserBlockList',traineesCtl.setUserBlockList)
-app.get('/getAllFavorites',userCtl.getAllFavorites)
-app.delete('/deleteFavorites',userCtl.deleteFavorites)
+app.get('/getAllFavorites',traineesCtl.getAllFavorites)
+app.delete('/deleteFavorites',traineesCtl.deleteFavorites)
 /*app.post('/addFavorites',userCtl.addFavorites)*/
 
 app.all('*', (req, res, next) => {

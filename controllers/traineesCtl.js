@@ -7,56 +7,37 @@ const axios = require('axios');
 
 module.exports={
     /* Adds a new user */
-    addUser: async (req, res) => {
-      const { email = null, name = null } = req.body;
-      const user = new newUser({ email, user});
-
-      user.save()
-          .then((result) => {
-          console.log(result);
-          res.status(200).send(`${user} registered successfully`);
-      },
-          (err) => {
-              console.log(err);
-              res.status(404).send(`registration failed`);
-          });
-  },
-    async getAllTrainees(req, res) {
+    async addProfile(req, res, next) {
       try {
-         const docs = await newUser.find({})
-         console.log(docs);
-         return res.send(docs);
-      } catch (err) { console.error(err) }
+         const { email = null,  user = null } = req.body;
+         if (!email || !user)
+            return res.json("userName and gmailAcount required");
+
+         const docs = await Profile.find({ email: email });
+         const docs1 = await Profile.find({ user: user });
+         if (docs.length) {
+            console.log("A profile with that gmail account already exist");
+            return res.json("A profile with that gmail account already exist");
+         }
+         if (docs1.length) {
+            console.log("A profile with that user name already exist");
+            return res.json("A profile with that user name already exist");
+         }
+         else {
+            const newUser = new newUser({
+
+               email: email,
+               user: user,
+            });
+            await newUser.save()
+            console.log(`saved document: ${newUser}`);
+            res.json({ newUser });
+
+
+         }
+      } catch (err) { console.error(err) };
    },
-   async createUser(req, res, next) {
-    try {
-      const { user = null, password = null, email= null } = req.body;
-      if(user == null || user == "" || user == " " || password == null || password == "" || password == " " )
-      return res.json("invalid input");
-        
-       const docs = await newUser.find({name });
-       const docs1 = await newUser.find({email });
-       
-       if (docs.length) {
-          console.log("A profile with that gmail account already exist");
-          return res.json("you already exist in the system");
-       }
-       if (docs1.length) {
-          console.log("A profile with that user name already exist");
-          return res.json("the user name already exist");
-       }
-       else {
-          const newUser = new newUser({
-            user: user,
-            password: password,
-            email: email});
-             
-          await newUser.save()
-          console.log(`new user added : ${newUser}`);
-          res.json({ newUser });
-       }
-    } catch (err) { console.error(err) };
- },
+  
  async deleteFavorites(req, res, next) {
   const { full_name=null,name = null } = req.params
   const result = newUser.update({"full_name":full_name},{$pull:{"favorites":name}})

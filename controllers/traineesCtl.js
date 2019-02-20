@@ -38,23 +38,7 @@ module.exports={
       } catch (err) { console.error(err) };
    },
   
- async deleteFavorites(req, res, next) {
-  const { full_name=null,name = null } = req.params
-  const result = newUser.update({"full_name":full_name},{$pull:{"favorites":name}})
-  if (result) {
-      res.status(200).send({ "deleted": 1 })
-  } else {
-      res.status(404).send({ "error":"there was a problem.please try again"})
-  } 
-},
-async getAllFavorites(req, res, next) {
-  try {
-     const { full_name = null } = req.query;
-     const result = await Profile.find({ "full_name": full_name });
-     console.log(result[0].favorites);
-     res.json(result[0].favorites);
-  } catch (err) { console.error(err) };
-},
+
 
  async setUserBlockList (req, res){
   const {full_name=null,upper_body=null,lower_body=null,middle_body=null}= req.body;

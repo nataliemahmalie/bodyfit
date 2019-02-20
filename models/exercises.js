@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-/*const newCategory=require (./category)*/
+const newCategory=require ('./category')
 
 
 const schema={
-    /*category: [category],*/
+    category: [newCategory],
     name: {type: String},
     image: { type: String},
     level: { type: String},

@@ -26,11 +26,9 @@ app.delete('/deleteExe/:name',exeCtl.deleteExe)
 app.post('/createUser/:user&email&password',traineesCtl.createUser) //work when gmail API is connected. 
 app.put('/editExeByName',exeCtl.editExeByName)
 app.put('/setUserBlockList',traineesCtl.setUserBlockList)
-
-/*app.post('/addFavorites',userCtl.addFavorites)
+app.get('/getAllFavorites',userCtl.getAllFavorites)
 app.delete('/deleteFavorites',userCtl.deleteFavorites)
-app.get('/getFavorites',userCtl.getFavorites)
-app.get('/getExeByCategory',exeCtl.getExeByCategory)*/
+/*app.post('/addFavorites',userCtl.addFavorites)*/
 
 app.all('*', (req, res, next) => {
     res.send({

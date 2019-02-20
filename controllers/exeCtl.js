@@ -44,37 +44,5 @@ module.exports = {
       else{
           res.status(404).send({"error":"there was a problem.please try again" })
       }
-  },
-
-/*
-    async :function getExePure(fav_array){
-        return new promise((resolve, reject) => {
-          newExe.find({"name": {$in: fav_array}}, (err, rec) => {
-            if(err)
-            reject(err);
-            else{
-              resolve(rec);
-            }
-          });
-        });
-      },
-   async: function getExeByCategory(category){
-        return new promise((resolve, reject) => {
-          category.findOne({"name": '5b164679e7179a6034c7403b'}, (err, rec) => {
-            if(err)
-            reject(err);
-            else{
-              getExePure(rec[category].newExe)
-              .then((result,error)=>{
-                if(error)
-                rejcect(error);
-                else
-                resolve(result);
-              });
-            }
-          });
-        });
-      }
-}
-}*/
+  }
 }

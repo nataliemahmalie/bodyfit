@@ -1,4 +1,4 @@
-/*const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const newCategory = new Schema({
@@ -8,5 +8,5 @@ const newCategory = new Schema({
 });
 
 
-module.exports =newCategory;*/
+module.exports =newCategory;
 

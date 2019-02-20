@@ -1,5 +1,5 @@
 const newUser =require('../models/trainees')
-//const newCategory=require('../models/category')
+const newCategory=require('../models/category')
 const promise = require('promise');
 const axios = require('axios');
 
@@ -42,11 +42,29 @@ module.exports={
        }
     } catch (err) { console.error(err) };
  },
+ async deleteFavorites(req, res, next) {
+  const { full_name=null,name = null } = req.params
+  const result = newUser.update({"full_name":full_name},{$pull:{"favorites":name}})
+  if (result) {
+      res.status(200).send({ "deleted": 1 })
+  } else {
+      res.status(404).send({ "error":"there was a problem.please try again"})
+  } 
+},
+async getAllFavorites(req, res, next) {
+  try {
+     const { full_name = null } = req.query;
+     const result = await Profile.find({ "full_name": full_name });
+     console.log(result[0].favorites);
+     res.json(result[0].favorites);
+  } catch (err) { console.error(err) };
+},
+
  async setUserBlockList (req, res){
-  const {user=null,upper_body=null,lower_body=null,middle_body=null}= req.body;
+  const {full_name=null,upper_body=null,lower_body=null,middle_body=null}= req.body;
    if(upper_body == true){
      console.log("upper_body");
-     newUser.updateOne({"user": user}, {"upper_body" : upper_body},
+     newUser.updateOne({"full_name":full_name}, {"upper_body" : upper_body},
      (err) => {
        if(err)
        console.log(`err: ${err}`);
@@ -54,14 +72,14 @@ module.exports={
    }
    if(lower_body == true){
      console.log("lower_body");
-     newUser.updateOne({"user": user}, {"lower_body" : lower_body},
+     newUser.updateOne({"full_name": full_name}, {"lower_body" : lower_body},
      (err) => {
        if(err)
        console.log(`err: ${err}`);
      });
    if(middle_body == true){
 console.log("middle_body");
-newUser.updateOne({"user":user }, {"middle_body" : middle_body},
+newUser.updateOne({"full_name":full_name}, {"middle_body" : middle_body},
 (err) => {
   if(err)
   console.log(`err: ${err}`);
@@ -71,58 +89,10 @@ newUser.updateOne({"user":user }, {"middle_body" : middle_body},
 /*
 
   
-  async: function createNewUser(full_name, password, email){
-    return new promise((resolve, reject) => {
-      if(full_name == null ||  full_name == "" || full_name == " " || password == null || password == "" || password == " " )
-      resolve("invalid input");
-  
-      newUser.findOne({'full_name': full_name},(err,rec)=>{
-        if(err){
-          console.log(`error:${err}`);
-        }
-        else if(rec == null){
-          var newUser = new newUser ({
-            full_name: full_name,
-            password: "0",
-            email: email,
-            favorites: [],
-            block_list:{
-              upper_body:0,
-              lower_body:0,
-              middle_body:0},
-            one_time: 0,
-            two_times: 0,
-            three_times:0,
-         
-          });
-      newUser.save(
-            (err) =>
-            {
-              if(err)
-              console.log(`err: ${err}`);
-              else{
-                resolve(newUser);
-              }
-            });
-          }
-          else {
-            resolve(rec);
-          }
-        });
-      });
-    },
 
- async deleteFavorites(req, res, next) {
-   const { full_name=null,name = null } = req.params
-   const result = await newExe.deleteOne(name);
-   if (result) {
-       res.status(200).send({ "deleted": 1 })
-   } else {
-       res.status(404).send({ "error":"there was a problem.please try again"})
-   }
-}}
 
- function addFavorites(full_name, name){
+
+function addFavorites(full_name, name){
   return new promise((resolve, reject) => {
     var temp = false;
     newUser.findOne({"full_name": full_name}, (err, rec) => {
@@ -158,43 +128,9 @@ newUser.updateOne({"user":user }, {"middle_body" : middle_body},
  });
  },
 
- function deleteFavorites(full_name, name){
-  return new promise((resolve, reject) => {
-    newUser.update({"full_name": full_name}, {$pull: {"favorites": name}},
-    (err) => {
-      if(err)
-      reject(`err:${err}`);
-      else{
-        resolve(`Updated document: ${newUser}`);
-      }
-    }
-  );
- });
-
- },
 
 
- function getFavorites(full_name){
-  return new promise((resolve, reject) => {
-    newUser.findOne({"full_name": full_name}, (err, rec) => {
-      if(err){
-        reject(err);
-      }
-      else{
-        if(rec.favorites == null || rec.favorites.length == 0 ){
-          resolve(false);
-        }
-        newExe.getExePure(rec.favorites)
-        .then((result, error) => {
-          if(error)
-          console.log(`error: ${error}`);
-          else{
-          resolve(result);
-          }
-        });
-      }
-    });
-  });
- }
+
+ 
 */
    
